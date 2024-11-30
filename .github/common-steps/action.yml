@@ -1,10 +1,6 @@
 name: Common Steps
 description: Common steps for all workflows
 
-defaults:
-  run:
-    shell: bash
-
 runs:
   using: 'composite'
   steps:
@@ -12,10 +8,12 @@ runs:
       uses: actions/checkout@v4
       with:
         fetch-depth: 1
+      shell: bash
     
     - name: Git make safe.directory
       run: |
         git config --global --add safe.directory "*"
+      shell: bash
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
@@ -23,3 +21,4 @@ runs:
         driver: docker
         driver-opts: |
             network=host
+      shell: bash
